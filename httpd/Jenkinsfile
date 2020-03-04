@@ -8,8 +8,25 @@ pipeline{
                     sh 'docker build -t httpdapp:1.0 httpd/'
                 }
             }
+        
         }
-    }
 
+        stage('Push Docker Image'){
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'Docker-hub-cred', passwordVariable: 'password', usernameVariable: 'username')]) {
+   
+                script{
+                    sh '''
+                        docker login --username $username --password $password
+                        docker image tag httpdapp sudheer5561/dockersampleimages:1.0
+                        docker push sudheer5561/dockersampleimages:1.0
+                    '''
+                }
+
+                }
+            }
+        }
+
+    }
 
 }
