@@ -1,0 +1,15 @@
+pipeline{
+    agent { label 'docker' }
+
+    stages{
+        stage('Build Docker Image'){
+            steps{
+                script{
+                    sh 'docker build -t httpdapp:1.0 .'
+                }
+            }
+        }
+    }
+
+
+}
