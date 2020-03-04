@@ -18,7 +18,7 @@ pipeline{
                 script{
                     sh '''
                         docker login --username $username --password $password
-                        docker image tag httpdapp sudheer5561/dockersampleimages:1.0
+                        docker image tag httpdapp:1.0 sudheer5561/dockersampleimages:1.0
                         docker push sudheer5561/dockersampleimages:1.0
                     '''
                 }
