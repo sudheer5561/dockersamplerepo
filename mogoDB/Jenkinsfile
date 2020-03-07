@@ -5,10 +5,29 @@ pipeline{
         stage('Build Image'){
             steps{
                 script{
-                sh 'docker build -t mongodatabase:1.0 mogoDB/'
+                sh 'docker build -t mongodatabase:1.1 mogoDB/'
             }
         }
             
+         }
+
+        stage('Push Image to Docker hub'){
+            steps{
+                script{
+
+                    withCredentials([usernamePassword(credentialsId: 'Docker-hub-cred', passwordVariable: 'pass-hub', usernameVariable: 'username-hub')]) {
+    
+                     sh '''
+                    docker login --username $username-hub --password $pass-hub
+                    docker image tag mongodatabase:1.1 sudheer5561/mongodbsamplerepo:1.1
+                    docker push sudheer5561/mongodbsamplerepo:1.1
+
+                    '''
+                    }                   
+
+
+                }
+            }
         }
     }
 }
