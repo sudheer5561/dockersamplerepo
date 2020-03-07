@@ -15,10 +15,10 @@ pipeline{
             steps{
                 script{
 
-                    withCredentials([usernamePassword(credentialsId: 'Docker-hub-cred', passwordVariable: 'pass-hub', usernameVariable: 'username-hub')]) {
+                    withCredentials([usernamePassword(credentialsId: 'Docker-hub-cred', passwordVariable: 'password', usernameVariable: 'username')]) {
     
                      sh '''
-                    docker login --username $username-hub --password $pass-hub
+                    docker login --username $username --password $password
                     docker image tag mongodatabase:1.1 sudheer5561/mongodbsamplerepo:1.1
                     docker push sudheer5561/mongodbsamplerepo:1.1
 
