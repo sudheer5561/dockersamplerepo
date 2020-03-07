@@ -3,9 +3,12 @@ pipeline{
 
     stages{
         stage('Build Image'){
-            script{
+            steps{
+                script{
                 sh 'docker build -t mongodatabase:1.0 mongoDB/'
             }
+        }
+            
         }
     }
 }
