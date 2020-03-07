@@ -1,11 +1,11 @@
-FROM centos:centos7
+pipeline{
+    agent { label 'docker'}
 
-COPY mongodb-org-4.2.repo /etc/yum.repos.d/
-
-RUN yum -y install mongodb-org
-
-RUN mkdir -p /data/db
-
-EXPOSE 27017
-
-CMD ["mongod"]
+    stages{
+        stage('Build Image'){
+            script{
+                sh 'docker build -t mongodatabase:1.0 mongoDB/'
+            }
+        }
+    }
+}
